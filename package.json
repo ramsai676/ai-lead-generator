@@ -1,0 +1,20 @@
+{
+  "name": "ai-lead-generator",
+  "version": "1.0.0",
+  "description": "Local-business lead-generation tool. Searches real businesses from OpenStreetMap by city + category, cleans and scores them as sales leads (e.g. 'no website' = hot lead for a web-design pitch), shows a dashboard, and exports CSV.",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node --test"
+  },
+  "keywords": ["lead-generation", "scraper", "openstreetmap", "overpass", "sales", "prospecting", "csv", "dashboard"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.2"
+  },
+  "engines": { "node": ">=18" }
+}
