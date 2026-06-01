@@ -51,7 +51,7 @@ app.get('/api/export', async (req, res) => {
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   app.listen(PORT, () => {
     console.log(`\n  🎯  AI Lead Generator on http://localhost:${PORT}`);
-    console.log('      Data: OpenStreetMap (Overpass + Nominatim) — free, no API key\n');
+    console.log('      Data: OpenStreetMap (Overpass + Nominatim) - free, no API key\n');
   });
 }
 

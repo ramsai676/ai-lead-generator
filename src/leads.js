@@ -77,27 +77,27 @@ export function scoreLead(lead) {
 
   if (!lead.website) {
     score += 50;
-    reasons.push('No website — strong candidate for a web-design pitch');
+    reasons.push('No website - strong candidate for a web-design pitch');
   } else {
     score += 8;
-    reasons.push('Has a website — potential upsell/redesign lead');
+    reasons.push('Has a website - potential upsell/redesign lead');
   }
 
   if (lead.phone) {
     score += 22;
-    reasons.push('Phone number available — directly reachable');
+    reasons.push('Phone number available - directly reachable');
   }
   if (lead.email) {
     score += 16;
-    reasons.push('Email available — reachable for outreach');
+    reasons.push('Email available - reachable for outreach');
   }
   if (!lead.phone && !lead.email && !lead.website) {
-    reasons.push('No contact info found — hard to reach');
+    reasons.push('No contact info found - hard to reach');
   }
 
   if (!lead.website && lead.hasSocial) {
     score += 10;
-    reasons.push('Active on social media but no website — clear gap to sell into');
+    reasons.push('Active on social media but no website - clear gap to sell into');
   }
 
   if (lead.address) {

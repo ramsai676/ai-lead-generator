@@ -47,7 +47,7 @@ function contactCell(l) {
   const bits = [];
   if (l.phone) bits.push(`<a href="tel:${l.phone}">${l.phone}</a>`);
   if (l.email) bits.push(`<a href="mailto:${l.email}">${l.email}</a>`);
-  return bits.length ? bits.join('<br>') : '<span class="muted">—</span>';
+  return bits.length ? bits.join('<br>') : '<span class="muted">-</span>';
 }
 
 function webCell(l) {
