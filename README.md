@@ -25,7 +25,11 @@ This mirrors a real agency workflow (the kind of pipeline you'd build for a digi
 
 `npm start` → <http://localhost:3003>. Try **"Coimbatore, India"** + category **Restaurants**, or tick *"Only businesses with no website"* to see pure prospects.
 
-> _Add your screenshot/GIF (e.g. `docs/demo.gif`) and deployed URL here._
+### Screenshots
+
+| Search a city + category | Scored leads + CSV export |
+| :---: | :---: |
+| ![Home screen](docs/01-home.png) | ![Lead dashboard with scores](docs/02-result.png) |
 
 ---
 
