@@ -1,6 +1,6 @@
-# 🎯 LeadFinder — Local Business Lead Generator
+# 🎯 LeadFinder - Local Business Lead Generator
 
-> Search any city, pull **real local businesses** from OpenStreetMap, and rank them as **sales leads** — businesses with **no website** rise to the top as hot prospects for a web/digital pitch. Filter, review, and **export to CSV**.
+> Search any city, pull **real local businesses** from OpenStreetMap, and rank them as **sales leads** - businesses with **no website** rise to the top as hot prospects for a web/digital pitch. Filter, review, and **export to CSV**.
 
 A practical prospecting tool that turns open map data into a working lead pipeline: **discover → clean → score → dashboard → export**. No paid APIs, no scraping of terms-protected sites.
 
@@ -13,10 +13,10 @@ A practical prospecting tool that turns open map data into a working lead pipeli
 
 ## ✨ Why this project
 
-This mirrors a real agency workflow (the kind of pipeline you'd build for a digital-services business) — but built **ethically and for free**:
+This mirrors a real agency workflow (the kind of pipeline you'd build for a digital-services business) - but built **ethically and for free**:
 
 - **Real data, no paid API, no ToS violation.** It uses the open **Overpass** + **Nominatim** APIs (OpenStreetMap), not Google Maps scraping.
-- **Opinionated lead scoring.** It's not just a list — each business gets a **0–100 lead score** and a **hot / warm / cold** tier, tuned for selling websites: *no website + reachable by phone = your hottest lead.*
+- **Opinionated lead scoring.** It's not just a list - each business gets a **0-100 lead score** and a **hot / warm / cold** tier, tuned for selling websites: *no website + reachable by phone = your hottest lead.*
 - **Actionable output.** Filter by tier and **export a clean CSV** ready for a CRM or outreach sequence.
 
 ---
@@ -37,14 +37,14 @@ This mirrors a real agency workflow (the kind of pipeline you'd build for a digi
 
 | Signal | Effect | Rationale |
 | --- | --- | --- |
-| **No website** | **+50** | They need exactly what you sell — the core opportunity. |
+| **No website** | **+50** | They need exactly what you sell - the core opportunity. |
 | Phone available | +22 | You can actually reach them. |
 | Email available | +16 | Reachable for outreach sequences. |
-| Social-only (no site) | +10 | Active online but missing a website — obvious gap. |
+| Social-only (no site) | +10 | Active online but missing a website - obvious gap. |
 | Verified address | +4 | Higher-quality, real record. |
 | Has website | +8 | Still a redesign/upsell lead, lower priority. |
 
-**Tiers:** 🔥 Hot ≥ 70 · 🌤 Warm 40–69 · ❄️ Cold < 40. Each lead carries human-readable reasons for its score.
+**Tiers:** 🔥 Hot ≥ 70 · 🌤 Warm 40-69 · ❄️ Cold < 40. Each lead carries human-readable reasons for its score.
 
 ---
 
@@ -68,7 +68,7 @@ No API key required.
 | --- | --- | --- |
 | `GET /api/search` | `place`, `category`, `onlyMissingWebsite` | Returns `{ place, summary, leads[] }`. |
 | `GET /api/export` | same | Streams a downloadable **CSV** of the leads. |
-| `GET /api/health` | — | `{ status, categories[] }`. |
+| `GET /api/health` | - | `{ status, categories[] }`. |
 
 Categories: `restaurant, cafe, bar, hotel, salon, gym, dentist, doctor, retail, bakery, car_repair, any`.
 
@@ -98,10 +98,10 @@ Categories: `restaurant, cafe, bar, hotel, salon, gym, dentist, doctor, retail, 
 
 ## ⚖️ Data & ethics
 
-- Business data is **© OpenStreetMap contributors**, licensed under the **ODbL** — attribute it when you publish results.
+- Business data is **© OpenStreetMap contributors**, licensed under the **ODbL** - attribute it when you publish results.
 - Be a good API citizen: the app sends a descriptive `User-Agent`, limits result sizes, and **blocks oversized areas** to respect the free public Overpass/Nominatim endpoints. For heavy use, run your own Overpass instance.
 - Use the leads for **lawful, consensual outreach** and follow local anti-spam / telemarketing rules (e.g. honour do-not-call lists).
 
 ## 📜 License
 
-MIT — see [LICENSE](LICENSE).
+MIT - see [LICENSE](LICENSE).
