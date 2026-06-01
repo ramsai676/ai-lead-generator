@@ -1,107 +1,88 @@
-# 🎯 LeadFinder - Local Business Lead Generator
+# LeadFinder
 
-> Search any city, pull **real local businesses** from OpenStreetMap, and rank them as **sales leads** - businesses with **no website** rise to the top as hot prospects for a web/digital pitch. Filter, review, and **export to CSV**.
+A prospecting tool that finds local businesses in any city and ranks them as sales leads. It pulls real business listings from OpenStreetMap, scores each one (a business with no website is the strongest lead for a web or digital-services pitch), shows the results in a dashboard, and exports them to CSV.
 
-A practical prospecting tool that turns open map data into a working lead pipeline: **discover → clean → score → dashboard → export**. No paid APIs, no scraping of terms-protected sites.
-
-![status](https://img.shields.io/badge/status-production--ready-2ecc71)
-![node](https://img.shields.io/badge/node-%3E%3D18-ffb020)
-![data](https://img.shields.io/badge/data-OpenStreetMap-7ebc6f)
+![node](https://img.shields.io/badge/node-%3E%3D18-informational)
 ![license](https://img.shields.io/badge/license-MIT-blue)
+![data](https://img.shields.io/badge/data-OpenStreetMap-success)
+![tests](https://img.shields.io/badge/tests-10%20passing-success)
 
----
+## Overview
 
-## ✨ Why this project
+LeadFinder turns open map data into a working lead pipeline: discover, clean, score, review, and export. It uses the free and keyless Overpass and Nominatim APIs rather than scraping a terms-protected source, so it is both practical and within the rules.
 
-This mirrors a real agency workflow (the kind of pipeline you'd build for a digital-services business) - but built **ethically and for free**:
+The output is opinionated. Each business gets a score from 0 to 100 and a hot, warm, or cold tier, tuned for selling websites: no website plus a reachable phone number is the hottest lead.
 
-- **Real data, no paid API, no ToS violation.** It uses the open **Overpass** + **Nominatim** APIs (OpenStreetMap), not Google Maps scraping.
-- **Opinionated lead scoring.** It's not just a list - each business gets a **0-100 lead score** and a **hot / warm / cold** tier, tuned for selling websites: *no website + reachable by phone = your hottest lead.*
-- **Actionable output.** Filter by tier and **export a clean CSV** ready for a CRM or outreach sequence.
+## Screenshots
 
----
-
-## 🖥️ Demo
-
-`npm start` → <http://localhost:3003>. Try **"Coimbatore, India"** + category **Restaurants**, or tick *"Only businesses with no website"* to see pure prospects.
-
-### Screenshots
-
-| Search a city + category | Scored leads + CSV export |
+| Search a city and category | Scored leads and CSV export |
 | :---: | :---: |
 | ![Home screen](docs/01-home.png) | ![Lead dashboard with scores](docs/02-result.png) |
 
----
+## How leads are scored
 
-## 🧮 How leads are scored
-
-| Signal | Effect | Rationale |
+| Signal | Effect | Reason |
 | --- | --- | --- |
-| **No website** | **+50** | They need exactly what you sell - the core opportunity. |
-| Phone available | +22 | You can actually reach them. |
-| Email available | +16 | Reachable for outreach sequences. |
-| Social-only (no site) | +10 | Active online but missing a website - obvious gap. |
-| Verified address | +4 | Higher-quality, real record. |
-| Has website | +8 | Still a redesign/upsell lead, lower priority. |
+| No website | +50 | They need exactly what you sell |
+| Phone available | +22 | You can reach them |
+| Email available | +16 | Reachable for outreach |
+| Social-only, no site | +10 | Active online but missing a website |
+| Verified address | +4 | Higher-quality record |
+| Has a website | +8 | Still a redesign or upsell lead |
 
-**Tiers:** 🔥 Hot ≥ 70 · 🌤 Warm 40-69 · ❄️ Cold < 40. Each lead carries human-readable reasons for its score.
+Tiers: Hot is 70 or above, Warm is 40 to 69, Cold is below 40. Each lead lists the reasons behind its score.
 
----
-
-## 🚀 Quick start
+## Getting started
 
 ```bash
-git clone https://github.com/<you>/ai-lead-generator.git
+git clone https://github.com/ramsai676/ai-lead-generator.git
 cd ai-lead-generator
 npm install
-npm start          # → http://localhost:3003
-npm test           # 10 unit tests (parsing + scoring), no network
+npm start
+# open http://localhost:3003
 ```
 
-No API key required.
+No API key is required. Try a specific city such as "Coimbatore, India" with a category, or tick the "no website" filter to see pure prospects.
 
----
+Run the tests:
 
-## 🔌 API
+```bash
+npm test
+```
+
+## API
 
 | Endpoint | Params | Purpose |
 | --- | --- | --- |
-| `GET /api/search` | `place`, `category`, `onlyMissingWebsite` | Returns `{ place, summary, leads[] }`. |
-| `GET /api/export` | same | Streams a downloadable **CSV** of the leads. |
-| `GET /api/health` | - | `{ status, categories[] }`. |
+| `GET /api/search` | `place`, `category`, `onlyMissingWebsite` | Returns the place, a summary, and the scored leads. |
+| `GET /api/export` | same | Streams a downloadable CSV of the leads. |
+| `GET /api/health` | | Service status and available categories. |
 
-Categories: `restaurant, cafe, bar, hotel, salon, gym, dentist, doctor, retail, bakery, car_repair, any`.
+Categories include restaurant, cafe, bar, hotel, salon, gym, dentist, doctor, retail, bakery, car_repair, and any.
 
----
-
-## 🏗️ How it works
+## How it works
 
 ```
-  place + category
-        │
-        ▼
-  Nominatim geocode  ──►  bounding box  (rejects regions that are too large)
-        │
-        ▼
-  Overpass API query  ──►  raw OSM business elements
-        │
-        ▼
-  leads.js (pure)     ──►  clean · dedupe · score · sort
-        │
-        ├──►  dashboard (filter by tier)
-        └──►  CSV export
+place + category
+   -> Nominatim geocode (rejects regions that are too large)
+   -> Overpass query for matching businesses
+   -> clean, dedupe, score, sort  (leads.js)
+   -> dashboard with tier filters, and CSV export
 ```
 
-**Stack:** Node.js + Express · global `fetch` · OpenStreetMap Overpass & Nominatim · vanilla dashboard · `node:test`.
+The parsing and scoring in `src/leads.js` are pure and unit-tested. Network handling is in `src/overpass.js`.
 
----
+## Tech stack
 
-## ⚖️ Data & ethics
+- Node.js and Express
+- The platform `fetch` API against OpenStreetMap Overpass and Nominatim
+- Vanilla dashboard with tier filters, summary stats, and CSV export
+- Built-in `node:test` for parsing and scoring
 
-- Business data is **© OpenStreetMap contributors**, licensed under the **ODbL** - attribute it when you publish results.
-- Be a good API citizen: the app sends a descriptive `User-Agent`, limits result sizes, and **blocks oversized areas** to respect the free public Overpass/Nominatim endpoints. For heavy use, run your own Overpass instance.
-- Use the leads for **lawful, consensual outreach** and follow local anti-spam / telemarketing rules (e.g. honour do-not-call lists).
+## Data and responsible use
 
-## 📜 License
+Business data is provided by OpenStreetMap contributors under the ODbL licence; attribute it when you publish results. The app sends a descriptive User-Agent, limits result sizes, and blocks oversized areas to respect the free public endpoints. Use the leads for lawful outreach and follow local anti-spam and do-not-call rules.
 
-MIT - see [LICENSE](LICENSE).
+## License
+
+MIT. See [LICENSE](LICENSE).
