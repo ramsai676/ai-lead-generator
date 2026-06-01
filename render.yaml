@@ -1,0 +1,11 @@
+# One-click deploy to Render (https://render.com) — free tier.
+# In Render: New + → Blueprint → connect this repo. Render reads this file.
+# No API keys needed — uses the free OpenStreetMap APIs.
+services:
+  - type: web
+    name: ai-lead-generator
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
