@@ -1,11 +1,18 @@
-# LeadFinder
+<!-- header:start -->
+<p align="center">
+  <img src=".github/banner.png" alt="Lead Generator: Finds local businesses on OpenStreetMap and ranks them as sales leads. CSV export." width="100%">
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/-JavaScript-1f2937?style=flat-square&logo=javascript&logoColor=white" alt="JavaScript">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-3b82f6?style=flat-square" alt="MIT license"></a>
+  <img src="https://img.shields.io/badge/tests-included-22c55e?style=flat-square" alt="Tests included">
+</p>
+
+<!-- header:end -->
 
 A prospecting tool that finds local businesses in any city and ranks them as sales leads. It pulls real business listings from OpenStreetMap, scores each one (a business with no website is the strongest lead for a web or digital-services pitch), shows the results in a dashboard, and exports them to CSV.
 
-![node](https://img.shields.io/badge/node-%3E%3D18-informational)
-![license](https://img.shields.io/badge/license-MIT-blue)
-![data](https://img.shields.io/badge/data-OpenStreetMap-success)
-![tests](https://img.shields.io/badge/tests-10%20passing-success)
 
 ## Overview
 
